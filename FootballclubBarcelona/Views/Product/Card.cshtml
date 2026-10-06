@@ -1,0 +1,29 @@
+@model FootballclubBarcelona.Models.ProductPurchasing
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1 style="color: blue">Order</h1>
+
+<p style="color: blue">Product: @ViewBag.ProductName</p>
+<p style="color: blue">Product Category: @ViewBag.ProductCategory</p>
+<p style="color: blue">Product Price: @ViewBag.ProductPrice</p>
+
+<img width="200" src="@ViewBag.ProductImage" />
+
+
+<form asp-action="Order" method="post">
+    <input type="hidden" asp-for="PlayerName" />
+    <input type="hidden" asp-for="ProductId" />
+    <label><span style="color: blue">Enter the number of the card</span></label>
+    <input type="text" required=""/>
+    <p></p>
+    <label><span style="color: blue">Enter the CCV of the card</span></label>
+    <input type="text" maxlength="3"
+           minlength="3"
+           pattern="[0-9]{3}"  required=""/>
+
+    <button type="submit" class="btn btn-sm btn-success">Order</button>
+
+</form>

@@ -1,0 +1,86 @@
+@model FootballclubBarcelona.Models.Match
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 style="color: blue">Details</h1>
+
+<div>
+    <h4 style="color: blue">Match</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            <p style="color: blue">@Html.DisplayNameFor(model => model.Competition)</p>
+        </dt>
+        <dd class = "col-sm-10">
+            <p style="color: blue">@Html.DisplayFor(model => model.Competition)</p>
+        </dd>
+        <dt class = "col-sm-2">
+            <p  style="color: blue">@Html.DisplayNameFor(model => model.Opponent)</p>
+        </dt>
+        <dd class = "col-sm-10">
+            <p style="color: blue">@Html.DisplayFor(model => model.Opponent)</p>
+        </dd>
+        <dt class = "col-sm-2">
+            <p style="color: blue">@Html.DisplayNameFor(model => model.Date)</p>
+        </dt>
+        <dd class = "col-sm-10">
+            <p style="color: blue">@Html.DisplayFor(model => model.Date)</p>
+        </dd>
+        <dt class = "col-sm-2">
+            <p style="color: blue">@Html.DisplayNameFor(model => model.Stadium)</p>
+        </dt>
+        <dd class = "col-sm-10">
+            <p style="color: blue">@Html.DisplayFor(model => model.Stadium)</p>
+        </dd>
+    </dl>
+</div>
+<div></div>
+<div></div>
+<div></div>
+<div>
+    @if (Model.Tickets != null && Model.Tickets.Any())
+    {
+        <h4 style="color: red">Tickets available for the match:</h4>
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="color: red">Side</th>
+                <th style="color: red">Block</th>
+                <th style="color: red">Seat</th>
+                <th style="color: red">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var ticket in Model.Tickets)
+            {
+                <tr>
+                    <td style="color: blue">@ticket.Side</td>
+                    <td style="color: blue">@ticket.Block</td>
+                    <td style="color: blue">@ticket.Seat</td>
+                    <td style="color: blue">@ticket.price</td>
+                    <td><form asp-controller="Ticket" asp-action="Purchasee" asp-route-id="@ticket.Id">
+                        <button type="submit" class="btn btn-sm btn-success">Purchase ticket</button>
+                    </form></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color: red">No tickets available for this match</p>
+    }
+</div>
+<div>
+    @if (User.IsInRole("Admin"))
+    {
+        <form asp-action="Edit" asp-route-id="@Model?.Id">
+            <button type="submit" class="btn btn-sm btn-warning">Edit</button>
+        </form>
+    }
+    <form asp-action="Index">
+        <button type="submit">Back to list</button>
+    </form>
+</div>

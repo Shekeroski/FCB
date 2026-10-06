@@ -1,0 +1,74 @@
+@model FootballclubBarcelona.Models.UserProfile
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h1 style="color: red">User Profile</h1>
+
+<div>
+    <p style="color: blue"><strong>First Name:</strong> @Model.FirstName</p>
+    <p style="color: blue"><strong>Last Name:</strong> @Model.LastName</p>
+    <p style="color: blue"><strong>Username:</strong> @Model.Username</p>
+    <p style="color: blue"><strong> E-mail:</strong> @Model.Email</p>
+</div>
+
+<hr/>
+
+<h2 style="color: red">My Tickets</h2>
+<div>
+@if (Model.TicketsPurchasings != null && Model.TicketsPurchasings.Any())
+{
+    foreach (var purchasing in Model.TicketsPurchasings)
+    {
+        <div>
+            <span style="color: blue"><strong>Barcelona VS @purchasing.Match?.Opponent</strong></span>
+            |
+            <span style="color: blue"><strong>Side: @purchasing.Ticket.Side</strong></span>
+            |
+            <span style="color: blue"><strong>Block: @purchasing.Ticket.Block</strong></span>
+            |
+            <span style="color: blue"><strong>Seat: @purchasing.Ticket.Seat</strong></span>
+            |
+            <span style="color: blue"><strong>Price: @purchasing.Ticket.price</strong></span>
+            |
+            <form asp-action="DeleteTicket" asp-controller="UserProfile" asp-route-id="@purchasing.Id" method="post" style="display: inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    }
+}
+else
+{
+    <p style="color: red">You haven't purchased any tickets yet</p>
+}
+<br/>
+<br/>
+<br/>
+<h2 style="color: red">My Clothes</h2>
+@if (Model.Products != null && Model.Products.Any())
+{
+    foreach (var purchasing in Model.Products)
+    {
+        <div>
+            <span style="color: blue"><strong>@purchasing.Product.Name</strong></span>
+            |
+            <span style="color: blue"><strong>@purchasing.PlayerName</strong></span>
+            |
+            <strong><img src="@purchasing.Product.Image" width="100px"/></strong>
+            |
+            <span style="color: blue"><strong>@purchasing.Product.Price</strong></span>
+            |
+            <form asp-action="DeleteProduct" asp-controller="UserProfile" asp-route-id="@purchasing.Id" method="post" style="display: inline">
+                <button type="submit">Delete Product</button>
+            </form>
+        </div>
+    }
+}
+else
+{
+    <p style="color: red">You haven't ordered a product yet</p>
+}
+</div>
+<form asp-controller="UserProfile" asp-action="Logout"> 
+    <button type="submit">Logout</button></form>

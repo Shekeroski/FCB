@@ -1,0 +1,35 @@
+@model FootballclubBarcelona.Models.Product
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1 style="color: blue">Order</h1>
+
+<p style="color: blue">Product: @ViewBag.ProductName</p>
+<p style="color: blue">Product Category: @ViewBag.ProductCategory</p>
+<img width="200" src="@ViewBag.ProductImage" />
+
+<form asp-action="Orderr" method="get">
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <label for="Size" style="color: blue">Choose size:</label>
+    <select name="Size" id="size" class="form-control" required="">
+        <option value="">-- Choose Size --</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="2XL">2XL</option>
+        <option value="3XL">3XL</option>
+    </select>
+
+    <label for="PlayerName" style="color: blue">Choose Player:</label>
+    <select name="PlayerName" id="PlayerName" asp-items="@ViewBag.ALLPLAYERS" class="form-control" required>
+        <option value="">-- Choose Player --</option>
+    </select>
+
+
+
+    <button type="submit">Go to Order</button>
+</form>

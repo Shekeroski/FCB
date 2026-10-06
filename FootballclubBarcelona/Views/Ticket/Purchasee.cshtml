@@ -1,0 +1,30 @@
+@model FootballclubBarcelona.Models.TicketPurchasing
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="color: blue"> Purchase Ticket</h1>
+
+<p style="color: blue">Match: Barcelona VS @ViewBag.Match</p>
+<p style="color: blue">Side: @ViewBag.Side</p>
+<p style="color: blue">Block: @ViewBag.Block</p>
+<p style="color: blue">Seat: @ViewBag.Seat</p>
+<p style="color: blue">Price: @ViewBag.Price</p>
+
+<p style="color: blue">The Ticket can only be paid by card please enter you'r card number and ccv to proceed the payment</p>
+
+<form asp-action="Purchase" method="post">
+    <strong><label style="color: blue">Card Number</label></strong>
+    <p></p>
+    <input type="text" required=""/>
+    <p></p>
+    <strong><label style="color: blue">CCV</label></strong>
+    <p></p>
+    <input type="text" required="" maxlength="3" minlength="3"/>
+    <input type="hidden" asp-for="@Model.TicketId"/>
+    <button type="submit" class="btn btn-sm btn-success">Purchase Ticket</button>
+</form>
+
+
+

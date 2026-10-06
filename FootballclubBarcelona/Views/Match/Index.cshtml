@@ -1,0 +1,69 @@
+@model IEnumerable<FootballclubBarcelona.Models.Match>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="color: deepskyblue">Matches</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<div>
+    <form asp-action="Index" method="get">
+        <label style="color: red">Competition</label>
+        <input type="text" name="competition" value="@ViewBag.CompetitionFilter"/>
+        <label style="color: red">Opponent</label>
+        <input type="text" name="opponent" value="@ViewBag.OpponentFilter"/>
+        <button type="submit">Search</button>
+    </form>
+</div>
+<p></p>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p style="color: black">@Html.DisplayNameFor(model => model.Competition)</p>
+            </th>
+            <th>
+                <p style="color: black">@Html.DisplayNameFor(model => model.Opponent)</p>
+            </th>
+            <th>
+                <p style="color: black">@Html.DisplayNameFor(model => model.Date)</p>
+            </th>
+            <th>
+                <p style="color: black">@Html.DisplayNameFor(model => model.Stadium)</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <strong><p style="color: blue">@Html.DisplayFor(modelItem => item.Competition)</p></strong>
+            </td>
+            <td>
+            <strong><p style="color: red">@Html.DisplayFor(modelItem => item.Opponent)</p></strong>
+            </td>
+            <td>
+                <strong><p style="color: blue">@Html.DisplayFor(modelItem => item.Date)</p></strong>
+            </td>
+            <td>
+                <strong><p style="color: red">@Html.DisplayFor(modelItem => item.Stadium)</p></strong>
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                }
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

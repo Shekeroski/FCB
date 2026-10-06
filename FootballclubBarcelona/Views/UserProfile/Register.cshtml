@@ -1,0 +1,43 @@
+@model FootballclubBarcelona.Models.RegisterRequest
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Register</h1>
+
+<form asp-action="Register" method="post">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName"></input>
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName"></input>
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email"></input>
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username"></input>
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password"></input>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <button type="submit">Register</button>
+</form>
+
+<p>
+    Already have an account?
+    <a asp-controller="UserProfile" asp-action="Login">
+        Login
+    </a>
+</p>

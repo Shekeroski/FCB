@@ -1,0 +1,109 @@
+@model IEnumerable<FootballclubBarcelona.Models.TeamAndPlayers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.years)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td colspan="5">
+            <h2>Goalkeepers</h2>
+        </td>
+    </tr>
+    @foreach (var player in Model.Where(x => x.position == "GK"))
+    {
+        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
+            <td> @Html.DisplayFor(modelItem => player.years) </td> 
+            <td> @Html.DisplayFor(modelItem => player.position) </td> 
+            <td> <img src="@player.image" width="200px" /> </td> 
+            <td>  @if (User.IsInRole("Admin"))
+                  {
+                      <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
+                      <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
+                  }
+                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a> </td> </tr>
+    }
+    <tr>
+        <td colspan="5">
+            <h2>Defenders</h2>
+        </td>
+    </tr>
+    @foreach (var player in Model.Where(x =>  x.position=="Right Back" || x.position=="Centre Back" || x.position=="Left Back" || x.position=="Left Back/Right Back" || x.position=="Right Back/Center Back" || x.position=="Centre Back / Defensive Midfielder"))
+    {
+        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
+            <td> @Html.DisplayFor(modelItem => player.years) </td> 
+            <td> @Html.DisplayFor(modelItem => player.position) </td> 
+            <td> <img src="@player.image" width="200px" /> </td> 
+            <td>  @if (User.IsInRole("Admin"))
+                  {
+                      <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
+                      <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
+                  }
+                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a> </td> </tr>
+    }
+    <tr>
+        <td colspan="5">
+            <h2>Midfielders</h2>
+        </td>
+    </tr>
+    @foreach (var player in Model.Where(x =>  x.position=="Midfielder" || x.position=="Central Midfielder" || x.position=="Attacking/Central Midfielder" || x.position=="Defensive/Central Midfielder" || x.position=="Attacking Midfielder" || x.position=="Defensive Midfielder"))
+    {
+        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
+            <td> @Html.DisplayFor(modelItem => player.years) </td> 
+            <td> @Html.DisplayFor(modelItem => player.position) </td> 
+            <td> <img src="@player.image" width="200px" /> </td> 
+            <td>  @if (User.IsInRole("Admin"))
+                  {
+                      <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
+                      <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
+                  }
+                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a></td> </tr>
+    }
+    <tr>
+        <td colspan="5">
+            <h2>Forwards</h2>
+        </td>
+    </tr>
+    @foreach (var player in Model.Where(x =>  x.position=="Striker" || x.position=="Left Winger" || x.position=="Right Winger" || x.position=="Left Winger / Forward" || x.position=="Winger / Forward" || x.position=="Left Winger "))
+    {
+        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
+            <td> @Html.DisplayFor(modelItem => player.years) </td> 
+            <td> @Html.DisplayFor(modelItem => player.position) </td> 
+            <td> <img src="@player.image" width="200px" /> </td> 
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
+                }
+                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a>
+            </td> </tr>
+    }
+    </tbody>
+</table>
+<img src="barcatrphie.jpeg" height="700" width="100%"/>

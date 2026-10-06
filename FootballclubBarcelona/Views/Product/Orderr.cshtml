@@ -1,0 +1,34 @@
+@model FootballclubBarcelona.Models.ProductPurchasing
+
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1 style="color: blue">Order</h1>
+
+<p style="color: blue">Product: @ViewBag.ProductName</p>
+<p style="color: blue">Product Category: @ViewBag.ProductCategory</p>
+<p style="color: blue">Player Name: @ViewBag.PlayerName</p>
+<p style="color: blue">Product Size: @ViewBag.Size</p>
+<img width="200" src="@ViewBag.ProductImage" />
+<p style="color: blue">Product Price: @ViewBag.ProductPrice</p>
+
+<input type="hidden" name="Size" value="@ViewBag.SelectedSize" />
+<input type="hidden" name="PlayerName" value="@ViewBag.SelectedPlayer" />
+
+<p style="color: blue">If you want to pay with card please click the button "Pay with card"</p>
+<p style="color: blue">If you don't want to pay with card click only the button "Order" and you can pay when it comes </p>
+
+<form asp-action="Card" asp-route-id="@Model.ProductId">
+    <input type="hidden" asp-for="PlayerName" />
+    <button type="submit">Pay with card</button>
+</form>
+
+<form asp-action="Order" method="post">
+    <input type="hidden" asp-for="PlayerName" />
+
+    <input type="hidden" asp-for="ProductId"/>
+
+    <button type="submit" class="btn btn-sm btn-success">Order</button>
+
+</form>
