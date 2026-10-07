@@ -4,17 +4,17 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 style="color: blue">Login</h1>
+<h1 style="color: lightyellow">Login</h1>
 
 <form asp-action="Login" method="post">
     <div>
-        <label asp-for="Username" style="color: blue"></label>
+        <label asp-for="Username" style="color: lightyellow"></label>
         <input asp-for="Username"/>
         <span asp-validation-for="Username"></span>
     </div>
     <div>
-        <label asp-for="Password"  style="color: blue"></label>
-        <input asp-for="Password"/>
+        <label asp-for="Password"  style="color: lightyellow"></label>
+        <input type="password" asp-for="Password"/>
         <span asp-validation-for="Password"></span>
     </div>
     <button type="submit" class="btn-dark">Login</button>
@@ -25,7 +25,7 @@
     <div asp-validation-summary="All"></div>
 }
 
-<p style="color: blue">
+<p style="color: lightyellow">
     Don't have an account?
     <a asp-controller="UserProfile" asp-action="Register">
         Register

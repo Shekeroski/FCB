@@ -4,71 +4,257 @@
     ViewData["Title"] = "User Profile";
 }
 
-<h1 style="color: red">User Profile</h1>
+<div class="container mt-5 mb-5">
 
-<div>
-    <p style="color: blue"><strong>First Name:</strong> @Model.FirstName</p>
-    <p style="color: blue"><strong>Last Name:</strong> @Model.LastName</p>
-    <p style="color: blue"><strong>Username:</strong> @Model.Username</p>
-    <p style="color: blue"><strong> E-mail:</strong> @Model.Email</p>
-</div>
+   
+    <div class="row justify-content-center mb-5">
 
-<hr/>
+        <div class="col-md-7">
 
-<h2 style="color: red">My Tickets</h2>
-<div>
-@if (Model.TicketsPurchasings != null && Model.TicketsPurchasings.Any())
-{
-    foreach (var purchasing in Model.TicketsPurchasings)
-    {
-        <div>
-            <span style="color: blue"><strong>Barcelona VS @purchasing.Match?.Opponent</strong></span>
-            |
-            <span style="color: blue"><strong>Side: @purchasing.Ticket.Side</strong></span>
-            |
-            <span style="color: blue"><strong>Block: @purchasing.Ticket.Block</strong></span>
-            |
-            <span style="color: blue"><strong>Seat: @purchasing.Ticket.Seat</strong></span>
-            |
-            <span style="color: blue"><strong>Price: @purchasing.Ticket.price</strong></span>
-            |
-            <form asp-action="DeleteTicket" asp-controller="UserProfile" asp-route-id="@purchasing.Id" method="post" style="display: inline;">
-                <button type="submit">Delete</button>
-            </form>
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-dark text-white text-center py-3">
+
+                    <h1 class="mb-0">
+                         User Profile
+                    </h1>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <strong>First Name:</strong>
+                        </div>
+                        <div class="col-7 text-end">
+                            @Model.FirstName
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <strong>Last Name:</strong>
+                        </div>
+                        <div class="col-7 text-end">
+                            @Model.LastName
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5">
+                            <strong>Username:</strong>
+                        </div>
+                        <div class="col-7 text-end">
+                            @Model.Username
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <strong>E-mail:</strong>
+                        </div>
+                        <div class="col-7 text-end">
+                            @Model.Email
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-    }
-}
-else
-{
-    <p style="color: red">You haven't purchased any tickets yet</p>
-}
-<br/>
-<br/>
-<br/>
-<h2 style="color: red">My Clothes</h2>
-@if (Model.Products != null && Model.Products.Any())
-{
-    foreach (var purchasing in Model.Products)
-    {
-        <div>
-            <span style="color: blue"><strong>@purchasing.Product.Name</strong></span>
-            |
-            <span style="color: blue"><strong>@purchasing.PlayerName</strong></span>
-            |
-            <strong><img src="@purchasing.Product.Image" width="100px"/></strong>
-            |
-            <span style="color: blue"><strong>@purchasing.Product.Price</strong></span>
-            |
-            <form asp-action="DeleteProduct" asp-controller="UserProfile" asp-route-id="@purchasing.Id" method="post" style="display: inline">
-                <button type="submit">Delete Product</button>
-            </form>
+
+    </div>
+
+
+   
+    <div class="card shadow-lg border-0 mb-5">
+
+        <div class="card-header bg-dark text-white py-3">
+
+            <h2 class="mb-0">
+                🎟 My Tickets
+            </h2>
+
         </div>
-    }
-}
-else
-{
-    <p style="color: red">You haven't ordered a product yet</p>
-}
+
+        <div class="card-body p-4">
+
+            @if (Model.TicketsPurchasings != null && Model.TicketsPurchasings.Any())
+            {
+                <div class="row">
+
+                    @foreach (var purchasing in Model.TicketsPurchasings)
+                    {
+                        <div class="col-md-6 mb-4">
+
+                            <div class="card h-100 border shadow-sm">
+
+                                <div class="card-body">
+
+                                    <h4 class="fw-bold mb-3">
+                                        🔵🔴 Barcelona VS @purchasing.Match?.Opponent
+                                    </h4>
+
+                                    <p class="mb-2">
+                                        <strong>Side:</strong>
+                                        @purchasing.Ticket.Side
+                                    </p>
+
+                                    <p class="mb-2">
+                                        <strong>Block:</strong>
+                                        @purchasing.Ticket.Block
+                                    </p>
+
+                                    <p class="mb-2">
+                                        <strong>Seat:</strong>
+                                        @purchasing.Ticket.Seat
+                                    </p>
+
+                                    <p class="mb-3">
+                                        <strong>Price:</strong>
+                                        <span class="badge bg-success fs-6">
+                                            @purchasing.Ticket.price
+                                        </span>
+                                    </p>
+
+                                    <form asp-action="DeleteTicket"
+                                          asp-controller="UserProfile"
+                                          asp-route-id="@purchasing.Id"
+                                          method="post">
+
+                                        <button type="submit"
+                                                class="btn btn-danger">
+                                            🗑️ Delete Ticket
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center mb-0">
+                    You haven't purchased any tickets yet.
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+    
+    <div class="card shadow-lg border-0 mb-5">
+
+        <div class="card-header bg-dark text-white py-3">
+
+            <h2 class="mb-0">
+                 My Clothes
+            </h2>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            @if (Model.Products != null && Model.Products.Any())
+            {
+                <div class="row">
+
+                    @foreach (var purchasing in Model.Products)
+                    {
+                        <div class="col-md-6 mb-4">
+
+                            <div class="card h-100 border shadow-sm">
+
+                                <div class="row g-0 h-100">
+
+                                    <div class="col-md-5 d-flex align-items-center justify-content-center p-3">
+
+                                        <img src="@purchasing.Product.Image"
+                                             alt="@purchasing.Product.Name"
+                                             class="img-fluid rounded"
+                                             style="max-height: 180px; object-fit: contain;" />
+
+                                    </div>
+
+                                    <div class="col-md-7">
+
+                                        <div class="card-body">
+
+                                            <h4 class="fw-bold">
+                                                @purchasing.Product.Name
+                                            </h4>
+
+                                            <p class="mb-2">
+                                                <strong>Player:</strong>
+                                                @purchasing.PlayerName
+                                            </p>
+
+                                            <p class="mb-3">
+                                                <strong>Price:</strong>
+                                                <span class="badge bg-success fs-6">
+                                                    @purchasing.Product.Price
+                                                </span>
+                                            </p>
+
+                                            <form asp-action="DeleteProduct"
+                                                  asp-controller="UserProfile"
+                                                  asp-route-id="@purchasing.Id"
+                                                  method="post">
+
+                                                <button type="submit"
+                                                        class="btn btn-danger">
+                                                    🗑️ Delete Product
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center mb-0">
+                    You haven't ordered a product yet.
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+   
+    <div class="text-center">
+
+        <form asp-controller="UserProfile" asp-action="Logout">
+
+            <button type="submit"
+                    class="btn btn-danger btn-lg">
+                 Logout
+            </button>
+
+        </form>
+
+    </div>
+
 </div>
-<form asp-controller="UserProfile" asp-action="Logout"> 
-    <button type="submit">Logout</button></form>

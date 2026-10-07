@@ -4,26 +4,71 @@
     ViewData["Title"] = "Order";
 }
 
-<h1 style="color: blue">Order</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h1 class="mb-0">
+                         Order Product
+                    </h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="@ViewBag.ProductImage"
+                             alt="@ViewBag.ProductName"
+                             class="img-fluid rounded"
+                             style="width: 250px; height: 250px; object-fit: contain;">
+                    </div>
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold">
+                            @ViewBag.ProductName
+                        </h2>
+                        <p class="text-muted mb-2">
+                            @ViewBag.ProductCategory
+                        </p>
+                        <h3 class="text-success fw-bold">
+                            @ViewBag.ProductPrice
+                        </h3>
+                    </div>
+                    <hr />
+                    <div class="alert alert-info text-center mb-4">
+                         <strong>Card Payment</strong>
+                        <br />
+                        Enter your card details below to complete your order.
+                    </div>
+                    <form asp-action="Order" method="post">
+                        <input type="hidden" asp-for="PlayerName" />
+                        <input type="hidden" asp-for="ProductId" />
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                Card Number
+                            </label>
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   placeholder="1234 5678 9012 3456"
+                                   required />
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">
+                                CCV
+                            </label>
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   placeholder="123"
+                                   maxlength="3"
+                                   minlength="3"
+                                   pattern="[0-9]{3}"
+                                   required />
 
-<p style="color: blue">Product: @ViewBag.ProductName</p>
-<p style="color: blue">Product Category: @ViewBag.ProductCategory</p>
-<p style="color: blue">Product Price: @ViewBag.ProductPrice</p>
-
-<img width="200" src="@ViewBag.ProductImage" />
-
-
-<form asp-action="Order" method="post">
-    <input type="hidden" asp-for="PlayerName" />
-    <input type="hidden" asp-for="ProductId" />
-    <label><span style="color: blue">Enter the number of the card</span></label>
-    <input type="text" required=""/>
-    <p></p>
-    <label><span style="color: blue">Enter the CCV of the card</span></label>
-    <input type="text" maxlength="3"
-           minlength="3"
-           pattern="[0-9]{3}"  required=""/>
-
-    <button type="submit" class="btn btn-sm btn-success">Order</button>
-
-</form>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-success btn-lg w-100">
+                             Place Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

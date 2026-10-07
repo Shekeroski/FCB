@@ -14,7 +14,9 @@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3"
          style="background: transparent !important; border: none !important;">
         <div class="container-fluid">
+            <a asp-controller="Home" asp-action="Index">
             <img src="~/barcaa.png" width="100px" height="100px"></img>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,7 +36,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Index"><strong><span style="color: darkred">Tickets</span></strong></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="LeagueTable" asp-action="Index"><strong><span style="color: darkred">League Table</span></strong></a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Legends" asp-action="legends"><strong><span style="color: darkred">Legends</span></strong></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="TeamAndPlayers" asp-action="Index"><strong><span style="color: darkred">Team</span></strong></a>

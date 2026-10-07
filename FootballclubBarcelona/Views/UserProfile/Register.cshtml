@@ -4,40 +4,38 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Register</h1>
+<h1 style="color: lightyellow">Register</h1>
 
 <form asp-action="Register" method="post">
     <div>
-        <label asp-for="FirstName"></label>
+        <label asp-for="FirstName" style="color: lightyellow"></label>
         <input asp-for="FirstName"></input>
         <span asp-validation-for="FirstName"></span>
     </div>
     <div>
-        <label asp-for="LastName"></label>
+        <label asp-for="LastName" style="color: lightyellow"></label>
         <input asp-for="LastName"></input>
         <span asp-validation-for="LastName"></span>
     </div>
     <div>
-        <label asp-for="Email"></label>
+        <label asp-for="Email" style="color: lightyellow"></label>
         <input asp-for="Email"></input>
         <span asp-validation-for="Email"></span>
     </div>
     <div>
-        <label asp-for="Username"></label>
+        <label asp-for="Username" style="color: lightyellow"></label>
         <input asp-for="Username"></input>
         <span asp-validation-for="Username"></span>
     </div>
     <div>
-        <label asp-for="Password"></label>
+        <label asp-for="Password" style="color: lightyellow"></label>
         <input asp-for="Password"></input>
         <span asp-validation-for="Password"></span>
     </div>
     <button type="submit">Register</button>
 </form>
 
-<p>
-    Already have an account?
+    <p style="color: lightyellow"> Already have an account? </p>
     <a asp-controller="UserProfile" asp-action="Login">
         Login
     </a>
-</p>

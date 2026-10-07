@@ -1,64 +1,111 @@
 @model IEnumerable<FootballclubBarcelona.Models.Ticket>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tickets";
 }
-<h1 style="color: deepskyblue">Tickets</h1>
-@if (User.IsInRole("Admin"))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Side)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Block)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Seat)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                Opponent
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <p style="color: red"><strong>@Html.DisplayFor(modelItem => item.Side)</strong></p>
-            </td>
-            <td>
-                <p style="color: blue"><strong>@Html.DisplayFor(modelItem => item.Block)</strong></p>
-            </td>
-            <td>
-                <p style="color: red"><strong>@Html.DisplayFor(modelItem => item.Seat)</strong></p>
-            </td>
-            <td>
-                <p style="color: blue"><strong>@Html.DisplayFor(modelItem => item.price)</strong></p>
-            </td>
-            <td><p style="color: red"><strong>@item.Match?.Opponent</strong></p></td>
-            <td> <form asp-action="Purchasee" asp-route-id="@item.Id">
-                <button type="submit">Purchase ticket</button>
-            </form> </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                }
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="container mt-5 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold" style="color:lightyellow">
+            ️ Barcelona Tickets
+        </h1>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="btn btn-success">
+                + Create Ticket
+            </a>
+        }
+    </div>
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="color: black" class="p-3">Side</th>
+                            <th style="color: black">Block</th>
+                            <th style="color: black">Seat</th>
+                            <th style="color: black">Price</th>
+                            <th style="color: black">Opponent</th>
+                            <th style="color: black" class="text-center">Purchase</th>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <th class="text-center">Admin</th>
+                            }
+
+                            <th class="text-center">Details</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="p-3 fw-bold">
+                                    @Html.DisplayFor(modelItem => item.Side)
+                                </td>
+
+                                <td>
+                                    <strong>@Html.DisplayFor(modelItem => item.Block)</strong>
+                                </td>
+
+                                <td>
+                                    <strong>@Html.DisplayFor(modelItem => item.Seat)</strong>
+                                </td>
+
+                                <td>
+                                    <span class="badge bg-success fs-6">
+                                        @Html.DisplayFor(modelItem => item.price)
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        Barcelona VS @item.Match?.Opponent
+                                    </strong>
+                                </td>
+
+                                <td class="text-center">
+                                    <form asp-action="Purchasee"
+                                          asp-route-id="@item.Id">
+                                        <button type="submit"
+                                                class="btn btn-sm btn-success">
+                                             Purchase
+                                        </button>
+                                    </form>
+                                </td>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <td class="text-center">
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    </td>
+                                }
+                                <td class="text-center">
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-info">
+                                        Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

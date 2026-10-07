@@ -4,32 +4,73 @@
     ViewData["Title"] = "Order";
 }
 
-<h1 style="color: blue">Order</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h1 class="mb-0" style="color:lightyellow"> Order Product</h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 text-center mb-4 mb-md-0">
+                            <img src="@ViewBag.ProductImage"
+                                 alt="@ViewBag.ProductName"
+                                 class="img-fluid rounded"
+                                 style="width: 320px; height: 320px; object-fit: contain;">
+                        </div>
+                        
+                        <div class="col-md-7">
+                            <h2 class="fw-bold mb-3">
+                                @ViewBag.ProductName
+                            </h2>
+                            <p class="text-muted mb-4">
+                                @ViewBag.ProductCategory
+                            </p>
+                            <form asp-action="Orderr" method="get">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <div class="mb-4">
+                                    <label for="size" class="form-label fw-bold">
+                                        Choose Size
+                                    </label>
+                                    <select name="Size"
+                                            id="size"
+                                            class="form-select form-select-lg"
+                                            required>
 
-<p style="color: blue">Product: @ViewBag.ProductName</p>
-<p style="color: blue">Product Category: @ViewBag.ProductCategory</p>
-<img width="200" src="@ViewBag.ProductImage" />
+                                        <option value="">-- Choose Size --</option>
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="2XL">2XL</option>
+                                        <option value="3XL">3XL</option>
 
-<form asp-action="Orderr" method="get">
-    <input type="hidden" name="id" value="@Model.Id"/>
-    <label for="Size" style="color: blue">Choose size:</label>
-    <select name="Size" id="size" class="form-control" required="">
-        <option value="">-- Choose Size --</option>
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-        <option value="2XL">2XL</option>
-        <option value="3XL">3XL</option>
-    </select>
+                                    </select>
 
-    <label for="PlayerName" style="color: blue">Choose Player:</label>
-    <select name="PlayerName" id="PlayerName" asp-items="@ViewBag.ALLPLAYERS" class="form-control" required>
-        <option value="">-- Choose Player --</option>
-    </select>
-
-
-
-    <button type="submit">Go to Order</button>
-</form>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="PlayerName" class="form-label fw-bold">
+                                        Choose Player
+                                    </label>
+                                    <select name="PlayerName"
+                                            id="PlayerName"
+                                            asp-items="@ViewBag.ALLPLAYERS"
+                                            class="form-select form-select-lg"
+                                            required>
+                                        <option value="">-- Choose Player --</option>
+                                    </select>
+                                </div>
+                                <button type="submit"
+                                        class="btn btn-success btn-lg w-100">
+                                    Continue to Order →
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

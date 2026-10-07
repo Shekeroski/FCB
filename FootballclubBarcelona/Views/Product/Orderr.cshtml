@@ -4,31 +4,80 @@
     ViewData["Title"] = "Order";
 }
 
-<h1 style="color: blue">Order</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header text-center bg-dark text-white py-3">
+                    <h1 class="mb-0" style="color:lightyellow">🔵🔴 Order Product</h1>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <img src="@ViewBag.ProductImage"
+                             alt="@ViewBag.ProductName"
+                             style="width: 250px; height: 250px; object-fit: contain;"
+                             class="img-fluid rounded">
+                    </div>
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold">@ViewBag.ProductName</h2>
+                        <p class="text-muted mb-1">
+                            @ViewBag.ProductCategory
+                        </p>
+                        <h3 class="text-success fw-bold">
+                            @ViewBag.ProductPrice
+                        </h3>
+                    </div>
 
-<p style="color: blue">Product: @ViewBag.ProductName</p>
-<p style="color: blue">Product Category: @ViewBag.ProductCategory</p>
-<p style="color: blue">Player Name: @ViewBag.PlayerName</p>
-<p style="color: blue">Product Size: @ViewBag.Size</p>
-<img width="200" src="@ViewBag.ProductImage" />
-<p style="color: blue">Product Price: @ViewBag.ProductPrice</p>
+                    <hr />
 
-<input type="hidden" name="Size" value="@ViewBag.SelectedSize" />
-<input type="hidden" name="PlayerName" value="@ViewBag.SelectedPlayer" />
+                    <div class="row text-center mb-4">
+                        <div class="col-md-4">
+                            <strong>Player</strong>
+                            <p class="text-muted">@ViewBag.PlayerName</p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Size</strong>
+                            <p class="text-muted">@ViewBag.Size</p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Category</strong>
+                            <p class="text-muted">@ViewBag.ProductCategory</p>
+                        </div>
+                    </div>
+                    <div class="alert alert-info text-center">
+                        <strong> Card Payment</strong>
+                        <br />
+                        If you want to pay with card, click
+                        <strong>"Pay with card"</strong>.
+                    </div>
 
-<p style="color: blue">If you want to pay with card please click the button "Pay with card"</p>
-<p style="color: blue">If you don't want to pay with card click only the button "Order" and you can pay when it comes </p>
+                    <div class="alert alert-secondary text-center">
+                        If you don't want to pay with card, click
+                        <strong>"Order"</strong> and you can pay when the
+                        product arrives.
+                    </div>
+                    <input type="hidden" name="Size" value="@ViewBag.SelectedSize" />
+                    <input type="hidden" name="PlayerName" value="@ViewBag.SelectedPlayer" />
+                    <div class="d-flex justify-content-center gap-3 mt-4">
+                        <form asp-action="Card" asp-route-id="@Model.ProductId">
+                            <input type="hidden" asp-for="PlayerName" />
 
-<form asp-action="Card" asp-route-id="@Model.ProductId">
-    <input type="hidden" asp-for="PlayerName" />
-    <button type="submit">Pay with card</button>
-</form>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Pay with card
+                            </button>
+                        </form>
 
-<form asp-action="Order" method="post">
-    <input type="hidden" asp-for="PlayerName" />
+                        <form asp-action="Order" method="post">
+                            <input type="hidden" asp-for="PlayerName" />
+                            <input type="hidden" asp-for="ProductId" />
 
-    <input type="hidden" asp-for="ProductId"/>
-
-    <button type="submit" class="btn btn-sm btn-success">Order</button>
-
-</form>
+                            <button type="submit" class="btn btn-success btn-lg">
+                                Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

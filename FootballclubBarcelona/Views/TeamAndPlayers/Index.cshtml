@@ -1,109 +1,403 @@
 @model IEnumerable<FootballclubBarcelona.Models.TeamAndPlayers>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Team";
 }
 
-<h1>Index</h1>
-@if (User.IsInRole("Admin"))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.years)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.position)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td colspan="5">
-            <h2>Goalkeepers</h2>
-        </td>
-    </tr>
-    @foreach (var player in Model.Where(x => x.position == "GK"))
-    {
-        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
-            <td> @Html.DisplayFor(modelItem => player.years) </td> 
-            <td> @Html.DisplayFor(modelItem => player.position) </td> 
-            <td> <img src="@player.image" width="200px" /> </td> 
-            <td>  @if (User.IsInRole("Admin"))
-                  {
-                      <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
-                      <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
-                  }
-                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a> </td> </tr>
-    }
-    <tr>
-        <td colspan="5">
-            <h2>Defenders</h2>
-        </td>
-    </tr>
-    @foreach (var player in Model.Where(x =>  x.position=="Right Back" || x.position=="Centre Back" || x.position=="Left Back" || x.position=="Left Back/Right Back" || x.position=="Right Back/Center Back" || x.position=="Centre Back / Defensive Midfielder"))
-    {
-        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
-            <td> @Html.DisplayFor(modelItem => player.years) </td> 
-            <td> @Html.DisplayFor(modelItem => player.position) </td> 
-            <td> <img src="@player.image" width="200px" /> </td> 
-            <td>  @if (User.IsInRole("Admin"))
-                  {
-                      <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
-                      <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
-                  }
-                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a> </td> </tr>
-    }
-    <tr>
-        <td colspan="5">
-            <h2>Midfielders</h2>
-        </td>
-    </tr>
-    @foreach (var player in Model.Where(x =>  x.position=="Midfielder" || x.position=="Central Midfielder" || x.position=="Attacking/Central Midfielder" || x.position=="Defensive/Central Midfielder" || x.position=="Attacking Midfielder" || x.position=="Defensive Midfielder"))
-    {
-        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
-            <td> @Html.DisplayFor(modelItem => player.years) </td> 
-            <td> @Html.DisplayFor(modelItem => player.position) </td> 
-            <td> <img src="@player.image" width="200px" /> </td> 
-            <td>  @if (User.IsInRole("Admin"))
-                  {
-                      <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
-                      <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
-                  }
-                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a></td> </tr>
-    }
-    <tr>
-        <td colspan="5">
-            <h2>Forwards</h2>
-        </td>
-    </tr>
-    @foreach (var player in Model.Where(x =>  x.position=="Striker" || x.position=="Left Winger" || x.position=="Right Winger" || x.position=="Left Winger / Forward" || x.position=="Winger / Forward" || x.position=="Left Winger "))
-    {
-        <tr> <td> @Html.DisplayFor(modelItem => player.name) </td>
-            <td> @Html.DisplayFor(modelItem => player.years) </td> 
-            <td> @Html.DisplayFor(modelItem => player.position) </td> 
-            <td> <img src="@player.image" width="200px" /> </td> 
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Edit" asp-route-id="@player.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@player.Id" class="btn btn-sm btn-danger">Delete</a>
-                }
-                <a asp-action="Details" asp-route-id="@player.Id" class="btn btn-sm btn-info">Details</a>
-            </td> </tr>
-    }
-    </tbody>
-</table>
-<img src="barcatrphie.jpeg" height="700" width="100%"/>
+<div class="container mt-5 mb-5">
+    
+    <div class="text-center mb-5">
+
+        <h1 class="display-4 fw-bold" style="color:lightyellow">
+            🔵🔴 FC Barcelona Team
+        </h1>
+
+        <p class="lead text-muted" style="color:black">
+            Meet the current Barça squad
+        </p>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="btn btn-success btn-lg mt-2">
+                + Add New Player
+            </a>
+        }
+
+    </div>
+
+
+    
+    <div class="mb-5">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color:lightyellow">
+                 Goalkeepers
+            </h2>
+
+            <hr />
+        </div>
+
+        <div class="row">
+
+            @foreach (var player in Model.Where(x => x.position == "GK"))
+            {
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow-sm border-0 h-100">
+
+                        <div class="row g-0 h-100">
+
+                            <div class="col-md-5 text-center p-3">
+
+                                <img src="@player.image"
+                                     alt="@player.name"
+                                     class="img-fluid rounded"
+                                     style="height: 220px; width: 100%; object-fit: contain;" />
+
+                            </div>
+
+                            <div class="col-md-7">
+
+                                <div class="card-body">
+
+                                    <h3 class="fw-bold">
+                                        @player.name
+                                    </h3>
+
+                                    <p class="mb-2">
+                                        <strong>Years:</strong>
+                                        @player.years
+                                    </p>
+
+                                    <p class="mb-4">
+                                        <strong>Position:</strong>
+                                        <span class="badge bg-primary">
+                                            @player.position
+                                        </span>
+                                    </p>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    }
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@player.Id"
+                                       class="btn btn-sm btn-info">
+                                        Details
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+    
+    <div class="mb-5">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color:lightyellow">
+                ️ Defenders
+            </h2>
+
+            <hr />
+        </div>
+
+        <div class="row">
+
+            @foreach (var player in Model.Where(x =>
+                x.position == "Right Back" ||
+                x.position == "Centre Back" ||
+                x.position == "Left Back" ||
+                x.position == "Left Back/Right Back" ||
+                x.position == "Right Back/Center Back" ||
+                x.position == "Centre Back / Defensive Midfielder"))
+            {
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow-sm border-0 h-100">
+
+                        <div class="row g-0 h-100">
+
+                            <div class="col-md-5 text-center p-3">
+
+                                <img src="@player.image"
+                                     alt="@player.name"
+                                     class="img-fluid rounded"
+                                     style="height: 220px; width: 100%; object-fit: contain;" />
+
+                            </div>
+
+                            <div class="col-md-7">
+
+                                <div class="card-body">
+
+                                    <h3 class="fw-bold">
+                                        @player.name
+                                    </h3>
+
+                                    <p class="mb-2">
+                                        <strong>Years:</strong>
+                                        @player.years
+                                    </p>
+
+                                    <p class="mb-4">
+                                        <strong>Position:</strong>
+                                        <span class="badge bg-primary">
+                                            @player.position
+                                        </span>
+                                    </p>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    }
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@player.Id"
+                                       class="btn btn-sm btn-info">
+                                        Details
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+  
+    <div class="mb-5">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color:lightyellow">
+                 Midfielders
+            </h2>
+
+            <hr />
+        </div>
+
+        <div class="row">
+
+            @foreach (var player in Model.Where(x =>
+                x.position == "Midfielder" ||
+                x.position == "Central Midfielder" ||
+                x.position == "Attacking/Central Midfielder" ||
+                x.position == "Defensive/Central Midfielder" ||
+                x.position == "Attacking Midfielder" ||
+                x.position == "Defensive Midfielder"))
+            {
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow-sm border-0 h-100">
+
+                        <div class="row g-0 h-100">
+
+                            <div class="col-md-5 text-center p-3">
+
+                                <img src="@player.image"
+                                     alt="@player.name"
+                                     class="img-fluid rounded"
+                                     style="height: 220px; width: 100%; object-fit: contain;" />
+
+                            </div>
+
+                            <div class="col-md-7">
+
+                                <div class="card-body">
+
+                                    <h3 class="fw-bold">
+                                        @player.name
+                                    </h3>
+
+                                    <p class="mb-2">
+                                        <strong>Years:</strong>
+                                        @player.years
+                                    </p>
+
+                                    <p class="mb-4">
+                                        <strong>Position:</strong>
+                                        <span class="badge bg-primary">
+                                            @player.position
+                                        </span>
+                                    </p>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    }
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@player.Id"
+                                       class="btn btn-sm btn-info">
+                                        Details
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+
+    <div class="mb-5">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color:lightyellow">
+                 Forwards
+            </h2>
+
+            <hr />
+        </div>
+
+        <div class="row">
+
+            @foreach (var player in Model.Where(x =>
+                x.position == "Striker" ||
+                x.position == "Left Winger" ||
+                x.position == "Right Winger" ||
+                x.position == "Left Winger / Forward" ||
+                x.position == "Winger / Forward" ||
+                x.position == "Left Winger "))
+            {
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow-sm border-0 h-100">
+
+                        <div class="row g-0 h-100">
+
+                            <div class="col-md-5 text-center p-3">
+
+                                <img src="@player.image"
+                                     alt="@player.name"
+                                     class="img-fluid rounded"
+                                     style="height: 220px; width: 100%; object-fit: contain;" />
+
+                            </div>
+
+                            <div class="col-md-7">
+
+                                <div class="card-body">
+
+                                    <h3 class="fw-bold">
+                                        @player.name
+                                    </h3>
+
+                                    <p class="mb-2">
+                                        <strong>Years:</strong>
+                                        @player.years
+                                    </p>
+
+                                    <p class="mb-4">
+                                        <strong>Position:</strong>
+                                        <span class="badge bg-primary">
+                                            @player.position
+                                        </span>
+                                    </p>
+
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-warning">
+                                            Edit
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@player.Id"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    }
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@player.Id"
+                                       class="btn btn-sm btn-info">
+                                        Details
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+    
+    <div class="text-center mt-5">
+
+        <img src="~/barcatrphie.jpeg"
+             class="img-fluid rounded shadow-lg"
+             alt="Barcelona Trophies"
+             style="width: 100%; max-height: 700px; object-fit: cover;" />
+
+    </div>
+
+</div>

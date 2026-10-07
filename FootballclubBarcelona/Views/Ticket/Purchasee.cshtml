@@ -1,30 +1,161 @@
 @model FootballclubBarcelona.Models.TicketPurchasing
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Purchase Ticket";
 }
 
-<h1 style="color: blue"> Purchase Ticket</h1>
+<div class="container mt-5 mb-5">
 
-<p style="color: blue">Match: Barcelona VS @ViewBag.Match</p>
-<p style="color: blue">Side: @ViewBag.Side</p>
-<p style="color: blue">Block: @ViewBag.Block</p>
-<p style="color: blue">Seat: @ViewBag.Seat</p>
-<p style="color: blue">Price: @ViewBag.Price</p>
+    <div class="row justify-content-center">
 
-<p style="color: blue">The Ticket can only be paid by card please enter you'r card number and ccv to proceed the payment</p>
+        <div class="col-md-7">
 
-<form asp-action="Purchase" method="post">
-    <strong><label style="color: blue">Card Number</label></strong>
-    <p></p>
-    <input type="text" required=""/>
-    <p></p>
-    <strong><label style="color: blue">CCV</label></strong>
-    <p></p>
-    <input type="text" required="" maxlength="3" minlength="3"/>
-    <input type="hidden" asp-for="@Model.TicketId"/>
-    <button type="submit" class="btn btn-sm btn-success">Purchase Ticket</button>
-</form>
+            <div class="card shadow-lg border-0">
 
+                <div class="card-header bg-dark text-white text-center py-3">
 
+                    <h1 class="mb-0" style="color:lightyellow">
+                        ️ Purchase Ticket
+                    </h1>
 
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="text-center mb-4">
+
+                        <h3 class="fw-bold" style="color:lightyellow">
+                            🔵🔴 FC Barcelona
+                        </h3>
+
+                        <p class="text-muted" style="color:lightyellow">
+                            Match Ticket
+                        </p>
+
+                    </div>
+
+                    <div class="card bg-light border-0 mb-4">
+
+                        <div class="card-body">
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <strong>Match:</strong>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    Barcelona VS @ViewBag.Match
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <strong>Side:</strong>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    @ViewBag.Side
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <strong>Block:</strong>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    @ViewBag.Block
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <strong>Seat:</strong>
+                                </div>
+
+                                <div class="col-6 text-end">
+                                    @ViewBag.Seat
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <strong>Total Price:</strong>
+                                </div>
+
+                                <div class="col-6 text-end">
+
+                                    <span class="badge bg-success fs-5">
+                                        @ViewBag.Price
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="alert alert-info text-center">
+
+                         <strong>Card Payment</strong>
+
+                        <br />
+
+                        The ticket can only be paid by card.
+                        Enter your card details below to proceed.
+
+                    </div>
+
+                    <form asp-action="Purchase" method="post">
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+                                Card Number
+                            </label>
+
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   placeholder="1234 5678 9012 3456"
+                                   required />
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+                                CCV
+                            </label>
+
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   placeholder="123"
+                                   maxlength="3"
+                                   minlength="3"
+                                   required />
+
+                        </div>
+
+                        <input type="hidden" asp-for="@Model.TicketId" />
+
+                        <button type="submit"
+                                class="btn btn-success btn-lg w-100">
+                             Purchase Ticket
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
