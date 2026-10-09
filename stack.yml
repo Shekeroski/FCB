@@ -3,7 +3,7 @@ version: 1
 ingress:
   - name: app
     service: web
-    port: 8080
+    port: 3000
     primary: true
     access:
       type: cas
