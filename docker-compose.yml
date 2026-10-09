@@ -1,10 +1,11 @@
 
+
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "8080:3000"
     environment:
       ASPNETCORE_URLS: http://+:3000
+    cpus: 1.0
+    mem_limit: 512m
