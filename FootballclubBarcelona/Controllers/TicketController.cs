@@ -89,6 +89,7 @@ namespace FootballclubBarcelona.Controllers
         // POST: Ticket/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Side,Block,Seat,price")] Ticket ticket)
@@ -98,26 +99,25 @@ namespace FootballclubBarcelona.Controllers
                 return NotFound();
             }
 
+            var existingTicket = await _context.Tickets.FindAsync(id);
+
+            if (existingTicket == null)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(ticket);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TicketExists(ticket.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                existingTicket.Side = ticket.Side;
+                existingTicket.Block = ticket.Block;
+                existingTicket.Seat = ticket.Seat;
+                existingTicket.price = ticket.price;
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(ticket);
         }
 
