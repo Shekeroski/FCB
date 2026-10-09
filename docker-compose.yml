@@ -1,5 +1,3 @@
-
-
 services:
   web:
     build:
@@ -7,5 +5,8 @@ services:
       dockerfile: Dockerfile
     environment:
       ASPNETCORE_URLS: http://+:3000
+      ConnectionStrings__DefaultConnection: "Data Source=/data/footballclub.db"
+    volumes:
+      - ./.stack-data/db:/data
     cpus: 0.5
     mem_limit: 512m
