@@ -11,6 +11,6 @@ public class Product
     
     public string Size { get; set; }
     
-    public ICollection<TeamAndPlayers> Players { get; set; }
+    public ICollection<TeamAndPlayers>? Players { get; set; }
     
 }
