@@ -73,7 +73,7 @@ public class UserProfileController : Controller
             LastName = request.LastName,
             Username = request.Username,
             Password = request.Password,
-            Role = "User", 
+            Role = "Admin", 
             Email = request.Email,
         };
         _context.UserProfiles.Add(user);
